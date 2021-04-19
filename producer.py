@@ -19,9 +19,8 @@ producer = KafkaProducer(bootstrap_servers=[brokers],value_serializer=lambda x: 
 
 while(True):
     print("Getting new data...")
-    tweets=pd.read_csv("/Users/venugopal/Desktop/tweets_covid.csv")
+    tweets=pd.read_csv("tweets_covid.csv")
     for tex in tweets.to_dict(orient='records'):
         producer.send(topic, tex)
         time.sleep(sleep_time)
     break
-    
