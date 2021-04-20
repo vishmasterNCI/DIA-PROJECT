@@ -27,7 +27,7 @@ class keyProcessIndicators():
         self._hash_df=self._df.withColumn("hashtags", hashtag_udf('text'))
         self._hash_df=self._hash_df.withColumn("hashtags", F.explode(flatten1(('hashtags')))).groupby("hashtags").count().sort('count', ascending=False)
         return self._hash_df
-    
+
     def get_users(self):
         users_udf=udf(lambda text:re.findall(r"(@\w+)",text),StringType())
         flatten1 = udf(lambda arr: str(arr).replace("[", "").replace("]", "").replace(" ","").split(","),ArrayType(StringType()))

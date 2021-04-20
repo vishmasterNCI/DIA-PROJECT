@@ -7,7 +7,7 @@ from time import sleep
 import requests as req
 import ast
 import json
-import seaborn as sns
+#import seaborn as sns
 import sys
 sys.setrecursionlimit(10**6)
 import pandas as pd

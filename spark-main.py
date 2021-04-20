@@ -7,14 +7,14 @@ from time import sleep
 import requests as req
 import ast
 import json
-import seaborn as sns
+#import seaborn as sns
 import sys
 sys.setrecursionlimit(10**6)
 import pandas as pd
 
 
 if __name__=="__main__":
-    
+
     brokers='localhost:9092'
     topic='tweets_covid'
     sleep_time=1
@@ -26,7 +26,7 @@ if __name__=="__main__":
     message_list=[]
     data_dict={"rows":None,"time_for_loading":None,"time_for_hashtag":None,"time_for_users":None,"time_for_cleaning":None,"time_for_sentiment_prediction":None}
     sc = SparkContext.getOrCreate()
-    while(True):    
+    while(True):
         for count,message in enumerate(consumer):
             message_list.append(json.loads(message.value))
             t1=time.time()
@@ -47,9 +47,9 @@ if __name__=="__main__":
             print("*"*20+"Top 5 mentioned users hashtags by frequency"+"*"*20)
             users.show(5)
             print("\n")
-            
-         
-            
+
+
+
                 #=p1.get_kpi_tweets()
             t4=time.time()
             s2=dataCleaning.dataCleaning(df)
@@ -62,8 +62,8 @@ if __name__=="__main__":
             print("*"*20+"Total tweets by sentiment"+"*"*20)
             s3._df.select('Sentiment').groupby("Sentiment").count().sort('count', ascending=False).show()
             print("\n")
-            
-            
+
+
             df=pd.DataFrame(data_dict,index=[count])
             df.to_csv("sparkdf_timings.csv",mode='a',header=False,index=False)
 #             h=sns.barplot(x=list(hashtags.index),y='Other_hash',data=hashtags,label='Count')# only 1 column is passed ie x or y
@@ -72,6 +72,3 @@ if __name__=="__main__":
 #             plt.title("top_related_hashtags")
 #             h.legend()
 #             plt.show()
-
-
-

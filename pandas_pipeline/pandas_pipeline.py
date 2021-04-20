@@ -1,6 +1,4 @@
 import re
-import tweepy
-from tweepy import OAuthHandler
 import pandas as pd
 import numpy as np
 import natsort
@@ -20,8 +18,8 @@ class keyProcessIndicators():
         self._df=df
         self._hash_list=[]
         self._user_list=[]
-        
-        
+
+
     def location_cleaner(self):
         self._df['Location']=self._df['Location'].apply(lambda x: "Not specified" if x=='' else x.lower())
         return self._df
@@ -43,7 +41,7 @@ class keyProcessIndicators():
         return top_related_hashtags
 
     def get_kpi_users(self):
-        
+
         self._df['user']=np.nan
         self._df['user']=self._df.text.apply(lambda x:["no user mentioned"] if not (re.findall(r"[@]\w*",x)) else re.findall(r"[@]\w*",x))
         df_explode=self._df
@@ -55,4 +53,3 @@ class keyProcessIndicators():
         top_related_users=self._df['user'].value_counts()
         #top_5_related_users=top_5_related_users[0:7].to_frame()
         return top_related_users
-

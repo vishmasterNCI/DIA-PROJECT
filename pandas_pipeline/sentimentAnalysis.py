@@ -18,14 +18,14 @@ from nltk.corpus import sentiwordnet as swn, wordnet
 class sentimentAnalysis():
     def __init__(self,df):
         self._df=df
-        self._vader = SentimentIntensityAnalyzer()  
-    
+        self._vader = SentimentIntensityAnalyzer()
+
     def vader_sentiment_score(self,sentence):
         sentiment_dict = self._vader.polarity_scores(sentence)
         #print (sentiment_dict)
         return sentiment_dict['compound']
-    def textblob_sentiment_score(self,sentence): 
-        # Create a SentimentIntensityAnalyzer object. 
+    def textblob_sentiment_score(self,sentence):
+        # Create a SentimentIntensityAnalyzer object.
         textblob_analyzer = TextBlob(sentence)
         textblob_score =  round(textblob_analyzer.sentiment.polarity,2)
         #print (textblob_analyzer.sentiment.polarity)
@@ -48,7 +48,7 @@ class sentimentAnalysis():
     def get_sentiment(self,tweets):
         tweets['Sentiment']=tweets['Sentiment_Score'].apply(lambda x:self.get_sentiment_label(x))
         return tweets
-    
+
     def main(self):
         self._df=self.get_sentiment_score(self._df)
         self._df=self.get_sentiment(self._df)

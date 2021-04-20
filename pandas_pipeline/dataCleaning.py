@@ -21,10 +21,10 @@ nltk.download('stopwords')
 from nltk.corpus import stopwords
 from nltk.sentiment import SentimentAnalyzer
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
-from wordcloud import WordCloud
+#from wordcloud import WordCloud
 from nltk.tokenize import sent_tokenize, word_tokenize
-import matplotlib.pyplot as plt
-import spacy
+#import matplotlib.pyplot as plt
+#import spacy
 from nltk.stem import WordNetLemmatizer, SnowballStemmer,PorterStemmer
 from nltk.corpus import sentiwordnet as swn, wordnet
 nltk.download('wordnet')
@@ -38,10 +38,7 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from wordcloud import WordCloud
 from nltk.tokenize import sent_tokenize, word_tokenize
 import matplotlib.pyplot as plt
-import spacy
-import gensim
-from gensim.utils import simple_preprocess
-from gensim.parsing.preprocessing import STOPWORDS
+
 from nltk.stem import WordNetLemmatizer, SnowballStemmer,PorterStemmer
 from nltk.stem.porter import *
 import numpy as np
@@ -56,10 +53,10 @@ class dataCleaning():
                         "V": wordnet.VERB,
                         "R": wordnet.ADV}
         self._stop_words = set(stopwords.words("english"))
-        self._stop_words.union(STOPWORDS)
+        #self._stop_words.union(STOPWORDS)
         #stop_words.union(nlp.Defaults.stop_words)
         self._stop_words.remove('not')
-    
+
     def stemSentence(self,sentence):
         token_words=word_tokenize(sentence)
         stem_sentence=[]
@@ -72,14 +69,14 @@ class dataCleaning():
         """Map POS tag to first character lemmatize() accepts"""
         tag = nltk.pos_tag([word])[0][1][0].upper()
         return self._tag_dict.get(tag,wordnet.NOUN)
-        
+
 
     def lemmatize_text(self,sentence):
         return " ".join([self._lemmatizer.lemmatize(w, self.get_wordnet_pos(w)) for w in nltk.word_tokenize(sentence)])
 
     def TokenizeText(self,text):
                 return [w for s in sent_tokenize(text) for w in word_tokenize(s)]
-    
+
     def RemoveStopwords(self,text):
                 tokens = [w for w in self.TokenizeText(text) if w not in self._stop_words]
                 return ' '.join(tokens)
@@ -94,7 +91,7 @@ class dataCleaning():
 
         #' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)"," ",x).split())
         return text
-    
+
     def preprocess_tweet(self):
 
         self._df.Location=self._df.Location.apply(lambda x: self.RemoveOverallNoise(x.lower()))
@@ -105,4 +102,3 @@ class dataCleaning():
         #df.to_csv('Cleaned_Tweet.csv',index = False,encoding='utf-8')
 
         return self._df
-    

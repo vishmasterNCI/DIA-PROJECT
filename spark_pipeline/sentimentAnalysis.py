@@ -3,12 +3,11 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from sklearn.decomposition import NMF, LatentDirichletAllocation
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction.text import CountVectorizer
-import matplotlib.pyplot as plt
-from wordcloud import WordCloud
+
 from textblob import TextBlob
 import pandas_explode
 pandas_explode.patch()
-import seaborn as sns
+
 from nltk.corpus import sentiwordnet as swn, wordnet
 from pyspark.sql.functions import udf
 from pyspark.sql.types import ArrayType, FloatType, StringType
@@ -25,8 +24,8 @@ from pyspark.ml.feature import Tokenizer, StopWordsRemover
 class sentimentAnalysis():
     def __init__(self,df):
         self._df=df
-          
-    
+
+
     def textblob_polarity_detection(self,text):
         return TextBlob(text).sentiment.polarity
 
@@ -34,7 +33,7 @@ class sentimentAnalysis():
         vs = self._vader.polarity_scores(text)
         return vs['compound']
 
-    def sentiment_score(self,vs,ts):    
+    def sentiment_score(self,vs,ts):
         return (vs+ts)/2
 
     def get_sentiment_label(self,Sentiment_Score):
@@ -59,7 +58,7 @@ class sentimentAnalysis():
                 return 'Positive'
             elif Sentiment_Score < 0.0:
                 return 'Negative'
-        def sentiment_score(vs,ts):    
+        def sentiment_score(vs,ts):
             return (vs+ts)/2
         # polarity detection
         textblob_polarity_detection_udf = udf(textblob_polarity_detection, FloatType())
