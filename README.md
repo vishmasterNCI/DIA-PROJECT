@@ -19,6 +19,8 @@ Steps for running after starting the container
  
  kafka-server-start.sh $KAFKA_HOME/config/server.properties &
  
+ hdfs dfs -mkdir -p /user/Hadoop/twitter_data
+ 
  python producer.py > output.txt &
  
  python pandas-main.py 500(or 1000 ,2000)
