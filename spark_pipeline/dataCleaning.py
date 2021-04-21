@@ -2,8 +2,8 @@ import re
 from textblob import TextBlob
 import pandas as pd
 import numpy as np
-import natsort
-from collections import OrderedDict
+#import natsort
+#from collections import OrderedDict
 import pandas_explode
 import nltk
 from nltk import sent_tokenize, word_tokenize, pos_tag
@@ -11,8 +11,8 @@ from nltk import sent_tokenize, word_tokenize, pos_tag
 import numpy as np
 import datetime
 import itertools
-nltk.download('wordnet')
-nltk.download('averaged_perceptron_tagger')
+#nltk.download('wordnet')
+#nltk.download('averaged_perceptron_tagger')
 nltk.download('punkt')
 nltk.download('stopwords')
 #!python -m spacy download en
@@ -23,22 +23,14 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.stem import WordNetLemmatizer, SnowballStemmer,PorterStemmer
 from nltk.corpus import sentiwordnet as swn, wordnet
-nltk.download('wordnet')
-nltk.download('averaged_perceptron_tagger')
-nltk.download('punkt')
-nltk.download('stopwords')
+#nltk.download('wordnet')
+#nltk.download('averaged_perceptron_tagger')
+#nltk.download('punkt')
+#nltk.download('stopwords')
 nltk.download('omw')
 nltk.download('vader_lexicon')
 #!python -m spacy download en
-from nltk.corpus import stopwords
-from nltk.sentiment import SentimentAnalyzer
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
-#from wordcloud import WordCloud
-from nltk.tokenize import sent_tokenize, word_tokenize
-#import matplotlib.pyplot as plt
-from nltk.stem import WordNetLemmatizer, SnowballStemmer,PorterStemmer
-from nltk.stem.porter import *
-import numpy as np
+#import numpy as np
 from pyspark.sql.functions import udf
 from pyspark.sql.types import ArrayType, FloatType, StringType
 from pyspark.sql import functions as F

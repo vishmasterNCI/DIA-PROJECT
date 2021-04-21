@@ -7,6 +7,8 @@ from nltk.corpus import stopwords
 from textblob import TextBlob
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 #from gensim.parsing.preprocessing import STOPWORDS
+import nltk
+nltk.download('stopwords')
 
 from nltk.stem import WordNetLemmatizer, SnowballStemmer,PorterStemmer
 stemmer=SnowballStemmer(language='english')

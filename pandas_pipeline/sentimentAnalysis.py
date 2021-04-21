@@ -3,12 +3,12 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from sklearn.decomposition import NMF, LatentDirichletAllocation
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction.text import CountVectorizer
-import matplotlib.pyplot as plt
-from wordcloud import WordCloud
+#import matplotlib.pyplot as plt
+#from wordcloud import WordCloud
 from textblob import TextBlob
 import pandas_explode
 pandas_explode.patch()
-import seaborn as sns
+#import seaborn as sns
 from nltk.corpus import sentiwordnet as swn, wordnet
 
 

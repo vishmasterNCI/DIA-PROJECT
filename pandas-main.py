@@ -36,10 +36,25 @@ if __name__=="__main__":
     time_for_sentiment=[]
     time_for_cleaning=[]
 
-    data_dict={"rows":None,"time_for_loading":None,"time_for_hashtag":None,"time_for_users":None,"time_for_cleaning":None,"time_for_sentiment_prediction":None}
+    data_dict={"rows":None,"time_for_loading":None,"time_for_hashtag":None,"time_for_users":None,"time_for_cleaning":None,"time_for_sentiment":None}
+    i=0
+    final_time=time.time()
     while(True):
-        for count,message in enumerate(consumer):
-            message_list.append(json.loads(message.value))
+         try:
+            i=i+1
+            message_list=[]
+            #records = consumer.poll(60 * 1000)
+            for count,message in enumerate(consumer):
+                #print ("%s:%d:%d: key=%s value=%s" % (message.topic, message.partition,
+                #                          message.offset, message.key,
+                #                          message.value))
+
+                message_list.append(json.loads(message.value))
+                if count==1000:
+                    break
+
+       #     for count,message in enumerate(consumer):
+           # message_list.append(json.loads(message.value))
             t1=time.time()
             df=pd.DataFrame().from_dict(message_list)
             data_dict["time_for_loading"]=time.time()-t1
@@ -78,7 +93,16 @@ if __name__=="__main__":
             data_dict["time_for_sentiment"]=time.time()-t5
             print("\n")
             df=pd.DataFrame(data_dict,index=[count])
-            df.to_csv("pandas_timings.csv",mode='a',header=False,index=False)
+            #print(df)
+            df.to_csv("pandas-timings.csv",mode='a',header=False,index=False)
+            print(i)
+            if i==10:
+                break
+         except:
+            break
+    print("total time for pandas script {}".format(time.time()-final_time))
+    df=pd.read_csv("pandas-timings.csv",names=["time_for_loading","time_for_hashtag","time_for_users","time_for_cleaning","time_for_sentiment_prediction"])
+    df.to_csv("pandas-timings.csv",index=False)
 
 
 #             h=sns.barplot(x=list(hashtags.index),y='Other_hash',data=hashtags,label='Count')# only 1 column is passed ie x or y

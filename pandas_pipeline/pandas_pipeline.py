@@ -1,8 +1,8 @@
 import re
 import pandas as pd
 import numpy as np
-import natsort
-from collections import OrderedDict
+#import natsort
+#from collections import OrderedDict
 
 import nltk
 from nltk import sent_tokenize, word_tokenize, pos_tag
