@@ -95,7 +95,7 @@ if __name__=="__main__":
             print(df)
             df.to_csv("sparkdf-timings-{}.csv".format(batch),mode='a',header=False,index=False)
             print(i)
-            if i==10/batch:
+            if i==10//batch:
                 break
          except Exception as e:
                         print(e)

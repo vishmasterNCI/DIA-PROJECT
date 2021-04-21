@@ -36,6 +36,12 @@ if __name__=="__main__":
     time_for_sentiment=[]
     time_for_cleaning=[]
 
+    if int(sys.argv[1])==500:
+        batch=0.5
+    elif int(sys.argv[1])==1000:
+        batch=1
+    elif int(sys.argv)==2000:
+        batch=2
     data_dict={"rows":None,"time_for_loading":None,"time_for_hashtag":None,"time_for_users":None,"time_for_cleaning":None,"time_for_sentiment":None}
     i=0
     final_time=time.time()
@@ -50,7 +56,7 @@ if __name__=="__main__":
                 #                          message.value))
 
                 message_list.append(json.loads(message.value))
-                if count==1000:
+                if count==int(sys.argv[1]):
                     break
 
        #     for count,message in enumerate(consumer):
@@ -96,7 +102,7 @@ if __name__=="__main__":
             #print(df)
             df.to_csv("pandas-timings.csv",mode='a',header=False,index=False)
             print(i)
-            if i==10:
+            if i==10//batch:
                 break
          except:
             break

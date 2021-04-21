@@ -26,7 +26,12 @@ if __name__ == "__main__":
     data_dict={"time_for_loading":None,"time_for_hashtag":None,"time_for_users":None,"time_for_cleaning":None,"time_for_sentiment_prediction":None}
     i=0
     final_time=time.time()
-    
+    if int(sys.argv[1])==500:
+        batch=0.5
+    elif int(sys.argv[1])==1000:
+        batch=1
+    elif int(sys.argv)==2000:
+        batch=2 
 
     while(True):
         try:
@@ -39,7 +44,7 @@ if __name__ == "__main__":
                 #                          message.value))
                 
                 message_list.append(json.loads(message.value))
-                if count==1000:
+                if count==int(sys.argv[1]):
                     break
             
             
@@ -99,7 +104,7 @@ if __name__ == "__main__":
             print(df)
             df.to_csv("map-reduce-timings.csv",mode='a',header=False,index=False)
             print(i)
-            if i==10:
+            if i==10//batch:
                 break
         except Exception as e:
             print(e)
