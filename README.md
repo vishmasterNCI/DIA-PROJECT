@@ -1,7 +1,7 @@
 # DIA-PROJECT
 
-Steps for running after starting the image
- DIA project
+Steps for running after starting the container
+
  
  conda init bash
  
