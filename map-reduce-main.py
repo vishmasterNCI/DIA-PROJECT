@@ -11,6 +11,7 @@ from time import sleep
 import requests as req
 import ast
 import json
+
 #import seaborn as sns
 #import matplotlib.pyplot as plt
 
@@ -23,15 +24,19 @@ if __name__ == "__main__":
     sleep_time=10
     message_list=[]
     sc = SparkContext.getOrCreate()
+    sc.setLogLevel("OFF")
     data_dict={"time_for_loading":None,"time_for_hashtag":None,"time_for_users":None,"time_for_cleaning":None,"time_for_sentiment_prediction":None}
     i=0
     final_time=time.time()
     if int(sys.argv[1])==500:
         batch=0.5
-    elif int(sys.argv[1])==1000:
-        batch=1
-    elif int(sys.argv)==2000:
-        batch=2 
+    elif int(sys.argv[1])==10000:
+        batch=10
+    elif int(sys.argv[1])==20000:
+        batch=20
+    else :
+        batch=int(sys.argv[1][0])
+        print(batch)
 
     while(True):
         try:
@@ -104,7 +109,7 @@ if __name__ == "__main__":
             print(df)
             df.to_csv("map-reduce-timings.csv",mode='a',header=False,index=False)
             print(i)
-            if i==10//batch:
+            if i==10000//batch:
                 break
         except Exception as e:
             print(e)

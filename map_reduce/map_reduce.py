@@ -88,10 +88,16 @@ class map_reduce():
         stop_words = set(stopwords.words("english"))
         #stop_words.union(STOPWORDS)
         #stop_words.union(nlp.Defaults.stop_words)
+        def words_lower(lines):
+                return [words.lower() for words in lines]
+        def words_filterer(lines):
+            return [words for words in lines if len(words)>3]
         stop_words.remove('not')
         words_list=self._sc.parallelize(text).map(lambda line:line.split())#
         words_list=words_list.map(lambda lines: list(set(lines).difference(stop_words)))
-        words_list=words_list.filter(lambda lines: all(stemmer.stem(words) for words in lines ))
+        words_list=words_list.filter(lambda lines: all(stemmer.stem(words) for words in lines))
+        words_list=words_list.map(lambda lines:words_lower(lines))
+        words_list=words_list.map(lambda lines:words_filterer(lines))
         words_list=words_list.map(lambda lines:" ".join(lines))
         return words_list
 
