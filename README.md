@@ -9,6 +9,8 @@ Steps for running after starting the container
  
  conda activate dia
  
+ cd DIA-PROJECT
+ 
  pip install -r requirements.txt
 
 ./hadoop/sbin/start-dfs.sh

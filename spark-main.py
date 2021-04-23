@@ -35,10 +35,14 @@ if __name__=="__main__":
     i=0
     if int(sys.argv[1])==500:
         batch=0.5
-    elif int(sys.argv[1])==1000:
-        batch=1
-    elif int(sys.argv)==2000:
-        batch=2
+    elif int(sys.argv[1])==10000:
+        batch=10
+    elif int(sys.argv[1])==20000:
+        batch=20
+    else :
+        batch=int(sys.argv[1][0])
+        print(batch)
+
     while(True):
          try:
             i=i+1

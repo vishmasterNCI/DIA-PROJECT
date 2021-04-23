@@ -6,7 +6,11 @@ from time import sleep
 import requests as req
 import pandas as pd
 
-
+import pydoop.hdfs as hd
+#hdfs://localhost:9000/
+with hd.open("DIA-PROJECT/tweets.csv") as f:
+    print(f)
+tweets =  pd.read_csv("/home/hduser/DIA-PROJECT/tweets.csv",names = ['polarity','id','date','query','user','text'],encoding='ISO-8859-1')
 brokers='localhost:9092'
 topic='tweets_covid'
 sleep_time=3000
@@ -15,7 +19,7 @@ sleep_time=3000
 
 
 producer = KafkaProducer(bootstrap_servers=[brokers],value_serializer=lambda x: dumps(x).encode('utf-8'),batch_size=10)
-tweets=pd.read_csv("tweets_covid.csv")
+#tweets=pd.read_csv("tweets_covid.csv")
 def chunks(L, n):
     for i in range(0, len(L), n):
         yield L[i:i+n]
