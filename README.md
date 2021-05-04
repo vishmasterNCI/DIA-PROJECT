@@ -21,10 +21,12 @@ Steps for running after starting the container
  
  kafka-server-start.sh $KAFKA_HOME/config/server.properties &
  
- python producer.py > output.txt &
+ unzip tweets.zip
+
+ spark-submit producer.py > output.txt &
  
- python pandas-main.py 500(or 1000 ,2000)
+ python pandas-main.py 10000(or 20000)
  
- spark-submit spark-main.py 500(or 1000 ,2000)
+ spark-submit spark-main.py 10000(2000)
  
- spark-submit map-reduce-main.py 500(or 1000 ,2000)
+ spark-submit map-reduce-main.py 10000(2000)
