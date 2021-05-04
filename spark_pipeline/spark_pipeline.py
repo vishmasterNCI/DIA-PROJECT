@@ -21,7 +21,7 @@ class keyProcessIndicators():
         return self._df
 
     def get_hashtag(self):
-        hashtag_udf=udf(lambda text:re.findall(r"(#\w+)",text),StringType())
+        hashtag_udf=udf(lambda text:re.findall(r"([#]\w+)",text),StringType())
         flatten1 = udf(lambda arr: str(arr).replace("[", "").replace("]", "").replace(" ","").split(","),ArrayType(StringType()))
         strip=udf(lambda s:s.strip(),StringType())
         self._hash_df=self._df.withColumn("hashtags", hashtag_udf('text'))
@@ -29,7 +29,7 @@ class keyProcessIndicators():
         return self._hash_df
 
     def get_users(self):
-        users_udf=udf(lambda text:re.findall(r"(@\w+)",text),StringType())
+        users_udf=udf(lambda text:re.findall(r"([@]\w+)",text),StringType())
         flatten1 = udf(lambda arr: str(arr).replace("[", "").replace("]", "").replace(" ","").split(","),ArrayType(StringType()))
         strip=udf(lambda s:s.strip(),StringType())
         self._users_df=self._df.withColumn("mentioned_users", users_udf('text'))

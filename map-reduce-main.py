@@ -109,7 +109,7 @@ if __name__ == "__main__":
             print(df)
             df.to_csv("map-reduce-timings.csv",mode='a',header=False,index=False)
             print(i)
-            if i==10000//batch:
+            if i==1000//batch:
                 break
         except Exception as e:
             print(e)
@@ -118,6 +118,13 @@ if __name__ == "__main__":
         #consumer.seek_to_end()
   
         #break
-    print("total time for map-reduce script {}".format(time.time()-final_time))
-    df=pd.read_csv("map-reduce-timings.csv",names=["time_for_loading","time_for_hashtag","time_for_users","time_for_cleaning","time_for_sentiment_prediction","rows","time_for_words_by_sentiment"])
+    total_time=time.time()-final_time
+    df=pd.read_csv("map-reduce-timings-{}.csv".format(batch),names=["time_for_loading","time_for_hashtag","time_for_users","time_for_cleaning","time_for_sentiment_prediction","rows","time_for_words_by_sentiment"])
     df.to_csv("map-reduce-timings.csv",index=False)
+    f = open("map_red_timing.txt", "a")
+    f.write("total time to execute the script:{}".format(total_time))
+    f.close()
+
+
+
+

@@ -38,10 +38,10 @@ if __name__=="__main__":
 
     if int(sys.argv[1])==500:
         batch=0.5
-    elif int(sys.argv[1])==1000:
-        batch=1
-    elif int(sys.argv)==2000:
-        batch=2
+    elif int(sys.argv[1])==10000:
+        batch=10
+    elif int(sys.argv[1])==20000:
+        batch=20
     data_dict={"rows":None,"time_for_loading":None,"time_for_hashtag":None,"time_for_users":None,"time_for_cleaning":None,"time_for_sentiment":None}
     i=0
     final_time=time.time()
@@ -98,8 +98,10 @@ if __name__=="__main__":
             print(p3._df['Sentiment'].value_counts())
             data_dict["time_for_sentiment"]=time.time()-t5
             print("\n")
+            print(data_dict)
             df=pd.DataFrame(data_dict,index=[count])
-            #print(df)
+            print(df)
+            print(df.columns)
             df.to_csv("pandas-timings.csv",mode='a',header=False,index=False)
             print(i)
             if i==10//batch:

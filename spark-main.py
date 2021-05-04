@@ -96,7 +96,7 @@ if __name__=="__main__":
 
 
             df=pd.DataFrame(data_dict,index=[i])
-            print(df)
+            print(df.columns)
             df.to_csv("sparkdf-timings-{}.csv".format(batch),mode='a',header=False,index=False)
             print(i)
             if i==10//batch:
@@ -104,9 +104,13 @@ if __name__=="__main__":
          except Exception as e:
                         print(e)
                         break
-    print("total time for sparkdf script {}".format(time.time()-final_time))
+    total_time=time.time()-final_time
     df=pd.read_csv("sparkdf-timings.csv",names=["rows","time_for_loading","time_for_hashtag","time_for_users","time_for_cleaning","time_for_sentiment_prediction"])
     df.to_csv("sparkdf-timings-{}.csv".format(batch),index=False)
+    f = open("spark_timing.txt", "a")
+    f.write("total time to execute the script:{}".format(total_time))
+    f.close()
+
 #             h=sns.barplot(x=list(hashtags.index),y='Other_hash',data=hashtags,label='Count')# only 1 column is passed ie x or y
 #             h.set_xticklabels(rotation=90,labels = list(hashtags.index))
 #             h.set(ylabel = 'Count')

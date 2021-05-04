@@ -1,5 +1,8 @@
 # DIA-PROJECT
 
+The steps to install Docker is same as that of the tutorial
+The Dockerfile will be uploaded on moodle,since it contains my password for github.
+
 Steps for running after starting the container
 
  
@@ -21,12 +24,18 @@ Steps for running after starting the container
  
  kafka-server-start.sh $KAFKA_HOME/config/server.properties &
  
+<<<<<<< HEAD
  hdfs dfs -mkdir -p /user/Hadoop/twitter_data
  
  python producer.py > output.txt &
+=======
+ unzip tweets.zip
+
+ spark-submit producer.py > output.txt &
+>>>>>>> 8c4c3d9e2eff80016b6998293b0e99fdff257968
  
- python pandas-main.py 500(or 1000 ,2000)
+ python pandas-main.py 10000(or 20000)
  
- spark-submit spark-main.py 500(or 1000 ,2000)
+ spark-submit spark-main.py 10000(2000)
  
- spark-submit map-reduce-main.py 500(or 1000 ,2000)
+ spark-submit map-reduce-main.py 10000(2000)
