@@ -1,5 +1,8 @@
 # DIA-PROJECT
 
+The steps to install Docker is same as that of the tutorial
+The Dockerfile will be uploaded on moodle,since it contains my password for github.
+
 Steps for running after starting the container
 
  
