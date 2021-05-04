@@ -5,12 +5,15 @@ from kafka import KafkaProducer
 from time import sleep
 import requests as req
 import pandas as pd
+import sys
 
 import pydoop.hdfs as hd
-#hdfs://localhost:9000/
-with hd.open("DIA-PROJECT/tweets.csv") as f:
-    print(f)
+hdfs="hdfs://localhost:9000/"
+#with hd.open("DIA-PROJECT/tweets_covid.csv") as f:
+#    print(f)
+#tweets=pd.read_csv("/home/hduser/DIA-PROJECT/tweets.csv")
 tweets =  pd.read_csv("/home/hduser/DIA-PROJECT/tweets.csv",names = ['polarity','id','date','query','user','text'],encoding='ISO-8859-1')
+#tweets=pd.read_csv(f)
 brokers='localhost:9092'
 topic='tweets_covid'
 sleep_time=3000
@@ -32,7 +35,7 @@ while(True):
     #tweets=pd.read_csv("tweets_covid.csv")
     for tex in text:
         #tex=tweets[["text"]].to_dict(orient='records')
-        print(tex)
+        #print(tex)
         producer.send(topic,tex)
         producer.flush()
     #producer.close()
