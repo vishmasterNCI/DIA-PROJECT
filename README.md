@@ -1,7 +1,10 @@
 # DIA-PROJECT
+The main idea behind this project was to compare and analyse the performance of traditional data science tools on Big data.The project consists of 
+This project aims to do online sentiment analysis on a stream of data from twitter.Since I wanted to try my hands on a wide range of tools,I have used Kafka to generate the stream instead of the traditional twitter+python/twitter+spark stream.Im not actually continuously generating the stream,instead downloading the data and then producing a continuos stream.But the improvement that could be made is to continuously generate it.
 
-The steps to install Docker is same as that of the tutorial
-The Dockerfile will be uploaded on moodle,since it contains my password for github.
+This project assumes you have a pseudo distributed HDFS system(single node),Hadoop ,Spark and Kafka pre-installed.
+
+#The Dockerfile will be provided on request only
 
 Steps for running after starting the container
 
